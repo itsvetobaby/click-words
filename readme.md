@@ -8,8 +8,8 @@
                 npx serve
             ```
             
-        walking the text nodes and inserting styled spans is that easy so i hope this code saved you some time. theres some messy tracking work splitting up what you type. if you're trying to de-cypher whats going on then i left the console.log() madness intact which helped me figure out how to build it.   
-        to include in your own code then includes the scripts and css files in the header and the scripts in the body. I tried to move it into a seperate file but the profits of hacking bring the curse of matted and tangled code. 
+        walking the text nodes and inserting styled spans is not that easy so i hope this code saved you some time. theres some messy tracking work splitting up what you type. if you're trying to de-cypher whats going on then i left the console.log() madness intact which helped me figure out how to build it.   
+        to include in your own code then includes the scripts and css files in the header and the scripts in the body. I tried to move it into a seperate file but the profits of having hacked foreign-bodies together bring the curse of matted, tangled and dependent  code. 
     
  
         
