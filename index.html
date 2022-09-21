@@ -9,699 +9,45 @@
       <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/js/medium-editor.min.js" integrity="sha512-5D/0tAVbq1D3ZAzbxOnvpLt7Jl/n8m/YGASscHTNYsBvTcJnrYNiDIJm6We0RPJCpFJWowOPNz9ZJx7Ei+yFiA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <script src="/table.js"></script>
-      <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.5/dist/flowbite.min.css" />
-      <script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
-      <link rel="stylesheet" href="/app.css">
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-230915091-1"></script>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-230915091-1"></script>
-      <link rel="stylesheet"
-         href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" />
-      <link rel="stylesheet"
-         href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic" />
-      <link rel="stylesheet" href="/table.css">
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4DQX87DW2"></script>
-      <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         
-         gtag('config', 'G-Q4DQX87DW2');
-      </script>
-      <script src="/redir.js"></script>
+      <link rel="stylesheet" href="./style.css">
+
       <script>!function(a,b){"use strict";var c="object"==typeof module&&process&&process.versions&&process.versions.electron;c||"object"!=typeof module?"function"==typeof define&&define.amd?define(function(){return b}):a.MediumEditorTable=b:module.exports=b}(this,function(){"use strict";function a(a){return a.getSelection?a.getSelection().toString():a.selection&&"Control"!==a.selection.type?a.selection.createRange().text:""}function b(a){var b=a.getSelection().anchorNode,c=b&&3===b.nodeType?b.parentNode:b;return c}function c(a,b,c){if(void 0!==a.getSelection&&b){var d=a.createRange(),e=a.getSelection();c?d.setStartBefore(b):d.setStartAfter(b),d.collapse(!0),e.removeAllRanges(),e.addRange(d)}}function d(a,b){if(!a)return!1;for(var c=a.parentNode,d=c.tagName.toLowerCase();"body"!==d;){if(d===b)return!0;if(c=c.parentNode,!c||!c.tagName)return!1;d=c.tagName.toLowerCase()}return!1}function e(a,b){var c=!(!a||!a.tagName)&&a.tagName.toLowerCase();if(!c)return!1;for(;c&&"body"!==c;){if(c===b)return a;a=a.parentNode,c=!(!a||!a.tagName)&&a.tagName.toLowerCase()}}function f(a,b,c,d){return this.init(a,b,c,d)}function g(a){return this.init(a)}function h(a){return this.init(a)}f.prototype={init:function(a,b,c,d){return this._root=a,this._callback=b,this.rows=c,this.columns=d,this._render()},setCurrentCell:function(a){this._currentCell=a},markCells:function(){[].forEach.call(this._cellsElements,function(a){var b={column:parseInt(a.dataset.column,10),row:parseInt(a.dataset.row,10)},c=this._currentCell&&b.row<=this._currentCell.row&&b.column<=this._currentCell.column;c===!0?a.classList.add("active"):a.classList.remove("active")}.bind(this))},_generateCells:function(){var a=-1;this._cells=[];for(var b=0;b<this.rows*this.columns;b++){var c=b%this.columns;0===c&&a++,this._cells.push({column:c,row:a,active:!1})}},_html:function(){var a=this.columns*k+2*l,b=this.rows*k+2*l,c='<div class="medium-editor-table-builder-grid clearfix" style="width:'+a+"px;height:"+b+'px;">';return c+=this._cellsHTML(),c+="</div>"},_cellsHTML:function(){var a="";return this._generateCells(),this._cells.map(function(b){a+='<a href="#" class="medium-editor-table-builder-cell'+(b.active===!0?" active":"")+'" data-row="'+b.row+'" data-column="'+b.column+'">',a+="</a>"}),a},_render:function(){this._root.innerHTML=this._html(),this._cellsElements=this._root.querySelectorAll("a"),this._bindEvents()},_bindEvents:function(){[].forEach.call(this._cellsElements,function(a){this._onMouseEnter(a),this._onClick(a)}.bind(this))},_onMouseEnter:function(a){var b,c=this;a.addEventListener("mouseenter",function(){clearTimeout(b);var a=this.dataset;b=setTimeout(function(){c._currentCell={column:parseInt(a.column,10),row:parseInt(a.row,10)},c.markCells()},50)})},_onClick:function(a){var b=this;a.addEventListener("click",function(a){a.preventDefault(),b._callback(this.dataset.row,this.dataset.column)})}},g.prototype={init:function(a){this.options=a,this._doc=a.ownerDocument||document,this._root=this._doc.createElement("div"),this._root.className="medium-editor-table-builder",this.grid=new f(this._root,this.options.onClick,this.options.rows,this.options.columns),this._range=null,this._toolbar=this._doc.createElement("div"),this._toolbar.className="medium-editor-table-builder-toolbar";var b=this._doc.createElement("span");b.innerHTML="Row:",this._toolbar.appendChild(b);var c=this._doc.createElement("button");c.title="Add row before",c.innerHTML='<i class="fa fa-long-arrow-up"></i>',c.onclick=this.addRow.bind(this,!0),this._toolbar.appendChild(c);var d=this._doc.createElement("button");d.title="Add row after",d.innerHTML='<i class="fa fa-long-arrow-down"></i>',d.onclick=this.addRow.bind(this,!1),this._toolbar.appendChild(d);var e=this._doc.createElement("button");e.title="Remove row",e.innerHTML='<i class="fa fa-close"></i>',e.onclick=this.removeRow.bind(this),this._toolbar.appendChild(e);var g=this._doc.createElement("span");g.innerHTML="Column:",this._toolbar.appendChild(g);var h=this._doc.createElement("button");h.title="Add column before",h.innerHTML='<i class="fa fa-long-arrow-left"></i>',h.onclick=this.addColumn.bind(this,!0),this._toolbar.appendChild(h);var i=this._doc.createElement("button");i.title="Add column after",i.innerHTML='<i class="fa fa-long-arrow-right"></i>',i.onclick=this.addColumn.bind(this,!1),this._toolbar.appendChild(i);var j=this._doc.createElement("button");j.title="Remove column",j.innerHTML='<i class="fa fa-close"></i>',j.onclick=this.removeColumn.bind(this),this._toolbar.appendChild(j);var k=this._doc.createElement("button");k.title="Remove table",k.innerHTML='<i class="fa fa-trash-o"></i>',k.onclick=this.removeTable.bind(this),this._toolbar.appendChild(k);var l=this._root.childNodes[0];this._root.insertBefore(this._toolbar,l)},getElement:function(){return this._root},hide:function(){this._root.style.display="",this.grid.setCurrentCell({column:-1,row:-1}),this.grid.markCells()},show:function(a){this._root.style.display="block",this._root.style.left=a+"px"},setEditor:function(a,b){if(this._range=a,this._toolbar.style.display="block",b){var c=this._doc.getElementsByClassName("medium-editor-table-builder-grid");c[0].style.display="none"}},setBuilder:function(){this._range=null,this._toolbar.style.display="none";var a=this._doc.getElementsByClassName("medium-editor-table-builder-grid");a[0].style.display="block";for(var b=0;b<a.length;b++)a[b].style.height=k*this.rows+2*l+"px",a[b].style.width=k*this.columns+2*l+"px"},getParentType:function(a,b){var c=!(!a||!a.nodeName)&&a.nodeName.toLowerCase();if(!c)return!1;for(;c&&"body"!==c;){if(c===b)return a;a=a.parentNode,c=!(!a||!a.nodeName)&&a.nodeName.toLowerCase()}},addRow:function(a,b){b.preventDefault(),b.stopPropagation();for(var c,d=this.getParentType(this._range,"tbody"),e=this.getParentType(this._range,"tr"),f=this._doc.createElement("tr"),g=0;g<e.childNodes.length;g++)c=this._doc.createElement("td"),c.appendChild(this._doc.createElement("br")),f.appendChild(c);a!==!0&&e.nextSibling?d.insertBefore(f,e.nextSibling):a===!0?d.insertBefore(f,e):d.appendChild(f),this.options.onClick(0,0)},removeRow:function(a){a.preventDefault(),a.stopPropagation();var b=this.getParentType(this._range,"tbody"),c=this.getParentType(this._range,"tr");b.removeChild(c),this.options.onClick(0,0)},addColumn:function(a,b){b.preventDefault(),b.stopPropagation();for(var c,d=this.getParentType(this._range,"tr"),e=this.getParentType(this._range,"td"),f=Array.prototype.indexOf.call(d.childNodes,e),g=this.getParentType(this._range,"tbody"),h=0;h<g.childNodes.length;h++)c=this._doc.createElement("td"),c.appendChild(this._doc.createElement("br")),a===!0?g.childNodes[h].insertBefore(c,g.childNodes[h].childNodes[f]):g.childNodes[h].childNodes[f].nextSibling?g.childNodes[h].insertBefore(c,g.childNodes[h].childNodes[f].nextSibling):g.childNodes[h].appendChild(c);this.options.onClick(0,0)},removeColumn:function(a){a.preventDefault(),a.stopPropagation();for(var b=this.getParentType(this._range,"tr"),c=this.getParentType(this._range,"td"),d=Array.prototype.indexOf.call(b.childNodes,c),e=this.getParentType(this._range,"tbody"),f=e.childNodes.length,g=0;g<f;g++)e.childNodes[g].removeChild(e.childNodes[g].childNodes[d]);this.options.onClick(0,0)},removeTable:function(a){a.preventDefault(),a.stopPropagation();var b=this.getParentType(this._range,"tr"),c=this.getParentType(this._range,"td"),d=(Array.prototype.indexOf.call(b.childNodes,c),this.getParentType(this._range,"table"));d.parentNode.removeChild(d),this.options.onClick(0,0)}};var i=9;h.prototype={init:function(a){this._editor=a,this._doc=this._editor.options.ownerDocument,this._bindTabBehavior()},insert:function(a,b){var d=this._html(a,b);this._editor.pasteHTML('<table class="medium-editor-table" id="medium-editor-table" width="100%"><tbody id="medium-editor-table-tbody">'+d+"</tbody></table>",{cleanAttrs:[],cleanTags:[]});var e=this._doc.getElementById("medium-editor-table"),f=this._doc.getElementById("medium-editor-table-tbody");0===$(e).find("#medium-editor-table-tbody").length&&$(f).detach().appendTo(e),f.removeAttribute("id"),e.removeAttribute("id"),c(this._doc,e.querySelector("td"),!0),this._editor.checkSelection()},_html:function(b,c){var d,e,f="",g=a(this._doc);for(d=0;d<=b;d++){for(f+="<tr>",e=0;e<=c;e++)f+="<td>"+(0===d&&0===e?g:"<br />")+"</td>";f+="</tr>"}return f},_bindTabBehavior:function(){var a=this;[].forEach.call(this._editor.elements,function(b){b.addEventListener("keydown",function(b){a._onKeyDown(b)})})},_onKeyDown:function(a){var f,g=b(this._doc);a.which===i&&d(g,"table")&&(a.preventDefault(),a.stopPropagation(),f=this._getTableElements(g),a.shiftKey?this._tabBackwards(g.previousSibling,f.row):(this._isLastCell(g,f.row,f.root)&&this._insertRow(e(g,"tbody"),f.row.cells.length),c(this._doc,g)))},_getTableElements:function(a){return{cell:e(a,"td"),row:e(a,"tr"),root:e(a,"table")}},_tabBackwards:function(a,b){a=a||this._getPreviousRowLastCell(b),c(this._doc,a,!0)},_insertRow:function(a,b){var c,d=document.createElement("tr"),e="";for(c=0;c<b;c+=1)e+="<td><br /></td>";d.innerHTML=e,a.appendChild(d)},_isLastCell:function(a,b,c){return b.cells.length-1===a.cellIndex&&c.rows.length-1===b.rowIndex},_getPreviousRowLastCell:function(a){if(a=a.previousSibling)return a.cells[a.cells.length-1]}};var j,k=16,l=1;return j=MediumEditor.extensions.form.extend({name:"table",aria:"create table",action:"table",contentDefault:"TBL",contentFA:'<i class="fa fa-table"></i>',handleClick:function(a){a.preventDefault(),a.stopPropagation(),this[this.isActive()===!0?"hide":"show"]()},hide:function(){this.setInactive(),this.builder.hide()},show:function(){this.setActive();var a=MediumEditor.selection.getSelectionRange(this.document);"td"===a.startContainer.nodeName.toLowerCase()||"td"===a.endContainer.nodeName.toLowerCase()||MediumEditor.util.getClosestTag(MediumEditor.selection.getSelectedParentElement(a),"td")?this.builder.setEditor(MediumEditor.selection.getSelectedParentElement(a),this.restrictNestedTable):this.builder.setBuilder(),this.builder.show(this.button.offsetLeft)},getForm:function(){return this.builder||(this.builder=new g({onClick:function(a,b){(a>0||b>0)&&this.table.insert(a,b),this.hide()}.bind(this),ownerDocument:this.document,rows:this.rows||10,columns:this.columns||10}),this.table=new h(this.base)),this.builder.getElement()}})}());</script>
       <script>
          var keywords = ["hello", "world", "foo", "bar", "baz", "qux", "quux", "corge", "grault", "garply", "waldo", "fred", "plugh", "xyzzy", "thud"];
-         
-         $(document).ready(() => {
-         
-             var current_split = split_and_clean()
-             console.log(current_split, document.getElementById("fold").textContent, "mns")
-             
-         
-             setTimeout(() => {
-                 called("parent")
-             }, 1000);
-         
-           
-         })
+
       </script>
    </head>
    <body>
-      <style>
-         body{
-         letter-spacing: 1px;
-         font-family: sans-serif;
-         font-size: 17px;
-         }
-         input {
-         outline: none;
-         border: 0;
-         }
-         .icons {
-         display: none;
-         }
-         .app {
-         width: 100%;
-         height: fit-content;;
-         display: grid;
-         }
-         .app .input-container {
-         position: relative;
-         width: 100%;
-         height: 65px;
-         border-radius: 10px;
-         background: #fff;
-         backface-visibility: hidden;
-         transform: translateZ(0) scale(1, 1);
-         }
-         li{
-         list-style-type: disc !important;
-         }
-         .borderUpDown:hover{
-         background-color: rgb(253, 253, 253);
-         /* padding-top: 30px;
-         padding-bottom: 30px; */
-         border-top: 1px solid #e6e6e6 !important;
-         border-bottom: 1px solid #e6e6e6 !important;
-         border-radius: 0px;
-         }
-         .app .input-container.animate {
-         animation: stretch-animation 800ms ease;
-         }
-         .app .input-container [type="text"] {
-         width: 100%;
-         height: 65px;
-         color: #ff3939;
-         font-family: 'Quicksand', sans-serif;
-         font-size: 18px;
-         letter-spacing: 2px;
-         padding: 0px 45px 0px 18px;
-         caret-color: #000;
-         background: transparent;
-         z-index: 5;
-         }
-         .app .input-container [type="text"]::placeholder {
-         color: rgba(34, 34, 34, 0.55);
-         }
-         textarea{
-         border: none;
-         letter-spacing: 1px;
-         font-family: sans-serif;
-         font-size: 17px;
-         padding: 0px;
-         letter-spacing: 1px;
-         font-family: sans-serif;
-         }
-         div:focus{
-         outline: none;
-         }
-         .app .input-container .suggestion-container {
-         width: 100%;
-         height: 65px;
-         position: absolute;
-         left: 0px;
-         top: 0px;
-         display: flex;
-         align-items: center;
-         color: #626262;
-         font-family: 'Quicksand', sans-serif;
-         font-size: 18px;
-         letter-spacing: 2px;
-         padding: 0px 45px 0px 18px;
-         pointer-events: none;
-         z-index: 4;
-         letter-spacing: 1px;
-         font-family: sans-serif;
-         font-size: 17px;
-         }
-         .app .input-container .icon {
-         position: absolute;
-         width: 20px;
-         height: 20px;
-         right: 20px;
-         top: 50%;
-         transform: translateX(0%) translateY(-50%);
-         opacity: 1;
-         transition: all 180ms ease-in;
-         z-index: 10;
-         }
-         span.suggestion-container {
-         letter-spacing: 1px;
-         font-size: 17px;
-         letter-spacing: 1px;
-         font-family: sans-serif !important;
-         }
-         .app .input-container .icon.hidden {
-         transform: translateX(80%) translateY(-50%);
-         opacity: 0;
-         }
-         .app .input-container .icon svg {
-         width: 100%;
-         height: 100%;
-         fill: #222;
-         pointer-events: none;
-         }
-         @keyframes stretch-animation {
-         0% {
-         transform: scale(1, 1);
-         }
-         10% {
-         transform: scale(1.02, 0.98);
-         }
-         30% {
-         transform: scale(0.98, 1.02);
-         }
-         50% {
-         transform: scale(1.02, 0.98);
-         }
-         100% {
-         transform: scale(1, 1);
-         }
-         }
-         .child {
-         position: absolute;
-         top: 0;
-         }
-         .child-1 {
-         left: 0;
-         }
-         .child-2 {
-         left: 150px;
-         }
-         .parent {
-         position: relative;
-         }
-         body {
-         font-family: sfpro;
-         }
-         div {
-         border-radius: 10px;
-         font-family: sans-serif;
-         }
-         h2 {
-         font-weight: bold;
-         text-transform: uppercase;
-         letter-spacing: 0.04em;
-         padding: 0 10px;
-         margin-bottom: 5px;
-         }
-         code {
-         padding: 5px 0px;
-         }
-         .parent {
-         position: relative;
-         width: 100%;
-         height: auto;
-         }
-         .child {
-         opacity: 0.8;
-         height: 150px;
-         width: 100%;
-         position: absolute;
-         top: 0;
-         }
-         .child1 {
-         left: 0;
-         }
-         .child2 {
-         left: 0px;
-         }
-         @keyframes spin {
-         0% { transform: rotate(0deg); }
-         100% {  transform: rotate(359deg); }
-         }
-         .spinning {
-         animation: spin 2s linear infinite;
-         }
-         .definition{
-         background-color: whitesmoke;
-         font-size: 18px;
-         padding: 1em;
-         margin-bottom: 1em;
-         }
-         div:focus{
-         outline: none;
-         }
-         @font-face {
-         font-family: 'sf';
-         font-style: italic;
-         font-weight: 800;
-         src: url('/sf.ttf');
-         }
-         .button-62 {
-         background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
-         border: 0;
-         border-radius: 12px;
-         color: #FFFFFF;
-         display: inline-block;
-         font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-         font-size: 16px;
-         font-weight: 500;
-         line-height: 2.5;
-         outline: transparent;
-         padding: 0 1rem;
-         text-align: center;
-         text-decoration: none;
-         transition: box-shadow .2s ease-in-out;
-         white-space: nowrap;
-         transition: 1s;
-         }
-         .button-62:not([disabled]):focus {
-         box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
-         }
-         .button-62:hover {
-         transform: scale(1.02);
-         }
-         .onboard-card{
-         margin: 1em;
-         margin-top: 5em;
-         position: relative;
-         z-index: 1;
-         border-radius: 12px;
-         background: rgb(255, 255, 255);
-         margin-bottom: 0px;
-         width: -webkit-fill-available;
-         }
-         .top-intro{
-         text-align: center;
-         font-size: 18px;
-         color: rgba(55, 53, 47, 0.65);
-         padding-top: 46px;
-         }
-         .title-intro{
-         text-align: center;
-         font-weight: 700;
-         font-size: 28px;
-         margin: 0px auto;
-         }
-         .onboard-flex-container{
-         display: flex;
-         margin-top: 32px;
-         display: flex;
-         margin-top: 32px;
-         }
-         .onboard-flex-container-left{
-         width: 330px;
-         margin-left: 32px;
-         }
-         .onboard-flex-container-left-highlight{
-         transition: all 0.2s ease 0s;
-         display: flex;
-         border-radius: 6px;
-         margin-bottom: 30px;
-         background: white;
-         box-shadow: rgb(15 15 15 / 2%) 0px 0px 0px 1px, rgb(15 15 15 / 5%) 0px 4px 8px, rgb(15 15 15 / 10%) 0px 12px 32px;   
-         }
-         .onboard-flex-container-left-normal{
-         transition: all 0.2s ease 0s;
-         display: flex;
-         border-radius: 6px;
-         margin-bottom: 10px;
-         background-color: #5d5d5d;
-         color: white;
-         }
-         .footer-container{
-         display: flex;
-         padding: 20px;
-         align-items: center;
-         }
-         .footer-bulk{
-         display: flex;
-         color: rgba(55, 53, 47, 0.65);
-         font-size: 14px;
-         width: 100%;
-         }
-         .footer-bulk-link{
-         display: block;
-         color: inherit;
-         text-decoration: none;
-         width: max-content;
-         }
-         .scrolling-wrapper {
-         overflow-x: scroll;
-         overflow-y: hidden;
-         white-space: nowrap;
-         }
-         .card {
-         display: inline-block;
-         width: 20em;
-         }
-         tbody{
-         white-space: initial;
-         }
-         table{
-         margin: 0px;
-         margin-right: 0px;
-         width: inherit;
-         margin-left: 0px !important;
-         }
-      </style>
-      <style>
-         @font-face {
-         font-family: 'UbuntuI';
-         font-style: italic;
-         font-weight: 800;
-         src: local('Ubuntu Mono'), url('https://fonts.cdnfonts.com/s/15251/UbuntuMono-BoldItalic.woff') format('woff');
-         }
-         .outlineNI:focus{
-         outline: none !important;
-         }
-         span:focus{
-         outline: none;
-         }
-         span{
-         border: none;
-         }
-         div{
-         border: none !important;
-         }
-         div:focus{
-         border: none !important;
-         }
-         .pad{
-         padding: 10px;
-         }
-         @font-face {
-         font-family: 'UbuntuI';
-         font-style: italic;
-         font-weight: 800;
-         src: local('Ubuntu Mono'), url('https://fonts.cdnfonts.com/s/15251/UbuntuMono-BoldItalic.woff') format('woff');
-         }
-         #texts{
-         z-index: 1;
-         }
-         #playground{
-         z-index: 1002;
-         }
-         div#playGround{
-         margin-top: -3px !important;
-         }
-      </style>
-      <style>
-         * {
-         box-sizing: border-box;
-         }
-         .share-buttons .share-button {
-         float: left;
-         margin-top: 15px;
-         }
-         .share-buttons .share-button:first-child {
-         margin-top: 0;
-         }
-         .share-buttons .share-button:after {
-         clear: both;
-         display: table;
-         }
-         .share-button {
-         display: block;
-         position: relative;
-         height: 30px;
-         }
-         .share-button:hover {
-         cursor: pointer;
-         }
-         .share-button:hover .share-button-primary {
-         box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.1);
-         }
-         .share-button:hover .share-button-secondary-content {
-         transform: translate3d(0, 0, 0);
-         }
-         .share-button-primary {
-         position: absolute;
-         background: #fff;
-         width: 30px;
-         height: 30px;
-         border-radius: 15px;
-         left: 0;
-         top: 50%;
-         margin-top: -15px;
-         }
-         .share-button-icon {
-         display: block;
-         color: #242424;
-         position: absolute;
-         width: 30px;
-         line-height: 30px;
-         font-size: 16px;
-         margin-top: 1px;
-         }
-         .share-button-secondary {
-         overflow: hidden;
-         margin-left: 15px;
-         height: 30px;
-         }
-         .share-button-secondary-content {
-         font-family: sans-serif;
-         font-size: 0.75em;
-         background: #fff;
-         display: block;
-         height: 30px;
-         text-align: left;
-         padding-left: 24px;
-         padding-right: 18px;
-         line-height: 30px;
-         color: #242424;
-         border-radius: 0 15px 15px 0;
-         transform: translate3d(-100%, 0, 0);
-         transition: transform 175ms ease;
-         }
-         body{
-         font-family: Arial, Helvetica, sans-serif;
-         padding: 0px;
-         margin: 0px;
-         }
-         .block_black, .block_gray{
-         font-family: 14px;
-         padding: 2px 24px;
-         width: 100%;
-         min-height: 27px;
-         font-weight: 600;
-         }
-         .block_black{
-         color: black;
-         }
-         .tag-indigo{
-         --tw-gradient-from: #eef2ff;
-         --tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to,rgba(238,242,255,0));
-         --tw-gradient-to: #eef2ff;
-         --tw-text-opacity: 1;
-         color: rgba(55,48,163,var(--tw-text-opacity));
-         }
-         .tag{
-         background-image: linear-gradient(to bottom,var(--tw-gradient-stops));
-         border-color: transparent;
-         border-radius: 0.5rem;
-         border-width: 1px;
-         font-size: .875rem;
-         line-height: 1.25rem;
-         overflow: hidden;
-         text-overflow: ellipsis;
-         white-space: nowrap;
-         align-items: center;
-         display: inline-flex;
-         flex: none;
-         height: 1.75rem;
-         margin-bottom: 0.25rem;
-         margin-right: 0.25rem;
-         max-width: 100%;
-         }
-         .tag>span {
-         padding-left: 0.5rem;
-         padding-right: 0.5rem;
-         }
-         .tag-white {
-         --tw-border-opacity: 1;
-         --tw-gradient-from: #fff;
-         --tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to,hsla(0,0%,100%,0));
-         --tw-gradient-to: #fff;
-         --tw-text-opacity: 1;
-         border-color: rgba(243,244,246,var(--tw-border-opacity));
-         color: rgba(55,65,81,var(--tw-text-opacity));
-         }
-         .block_gray{
-         color: #a7a5a0;
-         }
-         .mr-3{
-         margin-right: 1em;
-         }
-         .side_left{
-         height: 100vh;
-         }
-         /* The sidepanel menu */
-         .sidepanel {
-         height: 100vh; /* Specify a height */
-         width: 0; /* 0 width - change this with JavaScript */
-         position: fixed; /* Stay in place */
-         z-index: 1; /* Stay on top */
-         top: 0;
-         left: 0;
-         border-radius: 0px;
-         overflow-x: hidden; /* Disable horizontal scroll */
-         transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
-         }
-         /* The sidepanel links */
-         .sidepanel a {
-         padding: 8px 8px 8px 32px;
-         text-decoration: none;
-         font-size: 25px;
-         color: #818181;
-         display: block;
-         transition: 0.3s;
-         }
-         /* When you mouse over the navigation links, change their color */
-         .sidepanel a:hover {
-         color: #f1f1f1;
-         }
-         /* Position and style the close button (top right corner) */
-         .sidepanel .closebtn {
-         position: absolute;
-         top: 0;
-         right: 25px;
-         font-size: 36px;
-         margin-left: 50px;
-         }
-         #fold, #main_container2{
-         transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
-         }
-         h2:focus, p:focus, div:focus{
-         outline: none;
-         }
-         .un{
-         -webkit-user-select: none; /* Safari */        
-         -moz-user-select: none; /* Firefox */
-         -ms-user-select: none; /* IE10+/Edge */
-         user-select: none; /* Standard */
-         }
-         .vis{
-         display: block;
-         }
-         .unDis{
-         display: none;
-         }
-         .tag-blue {
-         --tw-gradient-from: #eff6ff;
-         --tw-gradient-stops: var(--tw-gradient-from),var(--tw-gradient-to,rgba(239,246,255,0));
-         --tw-gradient-to: #eff6ff;
-         --tw-text-opacity: 1;
-         color: rgba(30,64,175,var(--tw-text-opacity));
-         }
-         /* Style the button that is used to open the sidepanel */
-         a:focus{
-         outline: none
-         }   
-         medium-editor-toolbar li {
-         float: left;
-         list-style: none;
-         list-style-type: none !important;
-         margin: 0;
-         padding: 0;
-         }
-      </style>
-      <div id="crypto-modal" tabindex="-1" style="z-index:9999" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-               <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="crypto-modal">
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                     <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                  </svg>
-               </button>
-               <!-- Modal header -->
-               <div class="py-4 px-6 rounded-t border-b dark:border-gray-600">
-                  <h3 class="text-base font-semibold text-gray-900 lg:text-xl dark:text-white">
-                     Link to this note
-                  </h3>
-               </div>
-               <!-- Modal body -->
-               <div class="p-6">
-                  <p class="text-sm font-normal text-gray-500 dark:text-gray-400">People who open this note can edit it and it will be saved in their account, but not yours.</p>
-                  <ul class="my-4 mx-auto space-y-3 " style="width: fit-content;
-                     ">
-                     <li>
-                        <a href="#" class="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                           <div id="qrcode"></div>
-                        </a>
-                     </li>
-                  </ul>
-                  <div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div id="mySidepanel" class="sidepanel" style="padding-top: 1em; display: none;">
-         <a href="javascript:void(0)" style=" color: black;
-            padding: 2px; float: right;
-            border-radius: 4px; width: fit-content;
-            margin: 2px 24px; 
-            height: fit-content; " onclick="closeNav()">
+        <div id="mySidepanel" class="sidepanel" style="padding-top: 1em; display: none;">
+            <a href="javascript:void(0)" style=" color: black; padding: 2px; float: right; border-radius: 4px; width: fit-content; margin: 2px 24px; height: fit-content; " onclick="closeNav()">
             <svg id="menaIn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-               <rect x="3" y="3" width="18" height="18" rx="2"/>
-               <path d="M9 3v18"/>
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 3v18"/>
             </svg>
-         </a>
-         <div class="" style="padding: 2px 24px;">
-            <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(49, 49, 49);">Recents</span>    
-               <br>   <br>
-            <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(64, 120, 241);"><%= title %></span>       
-            <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(64, 120, 241);"><%= title %></span>      
-            <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(64, 120, 241);"><%= title %></span>      
-            <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(64, 120, 241);"><%= title %></span>  
-         </div>
+            </a>
          <br>
          <br>
-         <div class="" style="padding: 2px 24px;">
-            <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(49, 49, 49);">Active Tains</span>    
-               <br>   <br>
-            <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(64, 120, 241);">Libens</span>       
-         </div>
       </div>
       <div class="" id="main_container" style="margin: 10px; margin-left: 30px; ">
-      <div class="" id="topTriggers" style="display: flex; position: fixed; top: 0px; padding-top: 10px; background-color: white; width: 100%;">
-         <div id="toggle_containers" class=" tag tag-indigo" style="display: flex; width: fit-content;     display: flex;
-            margin-top: 8px;
-            background: #ffffff;
-            " onclick="openNav()">
+        <div class="" id="topTriggers" style="display: flex; position: fixed; top: 0px; padding-top: 10px; background-color: white; width: 100%;">
+         <div id="toggle_containers" class=" tag tag-indigo" style="display: flex; width: fit-content;     display: flex; margin-top: 8px; background: #ffffff; " onclick="openNav()">
             <svg id="mena" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                <rect x="3" y="3" width="18" height="18" rx="2"/>
                <path d="M9 3v18"/>
             </svg>
          </div>
-         <div id="toggle_containers" class=" tag tag-indigo" style="display: flex; display: flex;
-            margin-top: 8px;
-            background: #ffffff;
-            " onclick="openNav2()">
+         <div id="toggle_containers" class=" tag tag-indigo" style="display: flex; display: flex; margin-top: 8px; background: #ffffff; " onclick="openNav2()">
             <svg id="sida" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                <rect x="3" y="3" width="18" height="18" rx="2"/>
                <path d="M15 3v18"/>
             </svg>
          </div>
-         <div class="" style="margin-top: 8px;">
-            <!-- <div class="tag tag-white mr-3"><span>Home</span></div>
-               <div class="tag tag-blue mr-3"><span>gp here it is</span></div>
-               <div class="tag tag-blue mr-3"><span>gp gp go again</span></div>
-               
-               <div class="tag tag-blue mr-3"><span>gp</span></div>
-               <div class="tag tag-blue mr-3"><span>gp here it is</span></div>
-               <div class="tag tag-blue mr-3"><span>gp gp go again</span></div> -->
-         </div>
       </div>
       <div class="" id="fold">
-         <h2 class="text-xl font-bold text-gray-600" contenteditable="true"  style="text-transform: inherit; color: black; font-size: 1.5em;   " id="title">
-            <!-- <%= title %> -->
-         </h2>
-         <!-- <p contenteditable="true">Content...</p>
-            <button onclick="man_func()">call</button>
-            <div id="caretposition">0</div> -->
-
-        <p style="margin: 1em; font-family: arial;">
+        <p style="margin: 1em;  margin-top: 4em; font-family: arial;">
             clickable keyword recognition! <br>
-            var keywords = ["hello", "world", "foo", "bar", "baz", "qux", "quux", "corge", "grault", "garply", "waldo", "fred", "plugh", "xyzzy", "thud"];
-
-
+            keywords = ["hello", "world", "foo", "bar", "baz", "qux", "quux", "corge", "grault", "garply", "waldo", "fred", "plugh", "xyzzy", "thud"];
         </p>
          <div class="" id="fold" style="    margin-left: 14px; padding-bottom: 7em;">
             <div class="editable" onkeyup="called(this.id)" data-placeholder=" " id="parent" spellcheck="false"  style="padding-left: 2em;   border-left: 3px solid gainsboro!important;
@@ -711,1880 +57,323 @@
          </div>
          <div class="">
          </div>
-         <div id="main_container2" class="un" style="    width: 500px;
-            background-color: #fefefe;
-            position: fixed;
-            right: 0px;
-            top: 0px;
-            height: 100vh;">
-            <a href="javascript:void(0)" style=" color: black;
-               padding: 2px; 
-               border-radius: 4px; width: fit-content;
-               margin: 2px 24px;
-               height: fit-content; " onclick="closeNav2()">
+         <div id="main_container2" class="un" style="    width: 500px;background-color: #fefefe;position: fixed;right: 0px;top: 0px;height: 100vh;">
+            <a href="javascript:void(0)" style=" color: black;padding: 2px;  border-radius: 4px; width: fit-content;margin: 2px 24px;height: fit-content; " onclick="closeNav2()">
                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M13 17l5-5-5-5M6 17l5-5-5-5"/>
                </svg>
             </a>
             <div class="" id="ghostNotes" style="display: none;">
-               <% if ( notes ) { %>
-               <%= notes %>
-               <% } else { %>
-               <% } %>
             </div>
             <div id="sidebar" style="    overflow-y: scroll;
                height: inherit; padding: 1em"></div>
          </div>
       </div>
       <script>
-         function openNav() {
-         document.getElementById("mySidepanel").style.width = "250px";
-         document.getElementById("main_container").style.marginLeft = "280px";
-         document.getElementById("toggle_containers").style.display = "none";
-         document.getElementById("fold").style.marginLeft = "0px";
-         document.getElementById("topTriggers").style.paddingLeft = "10px";
-         document.getElementById("mena").style.stroke = "gray";
-         document.getElementById("menaIn").style.stroke = "gray";
-         
-         
-         
-         }
-         
-         /* Set the width of the sidebar to 0 (hide it) */
-         function closeNav() {
-         document.getElementById("mySidepanel").style.width = "0";
-         document.getElementById("main_container").style.marginLeft = "30px";
-         document.getElementById("toggle_containers").style.display = "flex";
-         document.getElementById("fold").style.marginLeft = "300px";
-         document.getElementById("topTriggers").style.paddingLeft = "300px";
-         document.getElementById("mena").style.stroke = "black";
-         
-         
-         
-         
-         }
-         
-         
-             //hide sidebars 
-             document.getElementById("main_container2").style.width = "0";
-             document.getElementById("sida").style.stroke = "black";
-         
-             function openNav2() {
-                 console.log("tryhing")
-                 document.getElementById("sida").style.stroke = "gray";
-                 document.getElementById("fold").style.marginRight = "400px";
-         
-                 if(document.getElementById("main_container2").style.width == `400px`){
-                     console.log("is closed")
-         
-                     document.getElementById("main_container2").style.width = `0`;
-                 } else {
-                     console.log("is open?")
-                     document.getElementById("main_container2").style.width = `400px`
-                 }
-                 // document.getElementById("main_container").style.width =  `${window.screen.availWidth - 400}px`;
-             }
-         
-             /* Set the width of the sidebar to 0 (hide it) */
-             function closeNav2() {
-                 document.getElementById("fold").style.marginRight = "10px";
-         
-                 document.getElementById("main_container2").style.width = "0";
-                 document.getElementById("fold").style.marginRight = "0";
-         
-                 document.getElementById("main_container").style.width =  `-webkit-fill-available`;
-                 document.getElementById("sida").style.stroke = "black";
-         
-         
-         
-             }
-      </script>
-      <style>
-
-        div#medium-editor-toolbar-1{
-    display: none !important;
-}
-
-
-.medium-editor-element{
-    font-family: arial !important;
-}
-        body{
-            font-family: Arial, Helvetica, sans-serif;
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "250px";
+            document.getElementById("main_container").style.marginLeft = "0px";
+            document.getElementById("toggle_containers").style.display = "none";
+            document.getElementById("fold").style.marginLeft = "0px";
+            document.getElementById("topTriggers").style.paddingLeft = "10px";
+            document.getElementById("mena").style.stroke = "gray";
+            document.getElementById("menaIn").style.stroke = "gray";
         }
-         .app {
-         width: 100%;
-         height: fit-content;;
-         display: grid;
-         }
-         .app .input-container {
-         position: relative;
-         width: 100%;
-         height: 65px;
-         border-radius: 10px;
-         background: #fff;
-         backface-visibility: hidden;
-         transform: translateZ(0) scale(1, 1);
-         }
-         .app .input-container.animate {
-         animation: stretch-animation 800ms ease;
-         }
-         .app .input-container [type="text"] {
-         width: 100%;
-         height: 65px;
-         color: #ff3939;
-         font-family: 'Quicksand', sans-serif;
-         font-size: 18px;
-         letter-spacing: 2px;
-         padding: 0px 45px 0px 18px;
-         caret-color: #000;
-         background: transparent;
-         z-index: 5;
-         }
-         .app .input-container [type="text"]::placeholder {
-         color: rgba(34, 34, 34, 0.55);
-         }
-         textarea{
-         border: none;
-         letter-spacing: 1px;
-         font-family: sans-serif;
-         font-size: 17px;
-         padding: 0px;
-         letter-spacing: 1px;
-         font-family: sans-serif;
-         }
-         div:focus{
-         outline: none;
-         }
-         .app .input-container .suggestion-container {
-         width: 100%;
-         height: 65px;
-         position: absolute;
-         left: 0px;
-         top: 0px;
-         display: flex;
-         align-items: center;
-         color: #626262;
-         font-family: 'Quicksand', sans-serif;
-         font-size: 18px;
-         letter-spacing: 2px;
-         padding: 0px 45px 0px 18px;
-         pointer-events: none;
-         z-index: 4;
-         letter-spacing: 1px;
-         font-family: sans-serif;
-         font-size: 17px;
-         }
-         .app .input-container .icon {
-         position: absolute;
-         width: 20px;
-         height: 20px;
-         right: 20px;
-         top: 50%;
-         transform: translateX(0%) translateY(-50%);
-         opacity: 1;
-         transition: all 180ms ease-in;
-         z-index: 10;
-         }
-         span.suggestion-container {
-         letter-spacing: 1px;
-         font-size: 1em;
-         letter-spacing: 1px;
-         font-family: sans-serif !important;
-         line-height: 1em;
-         color: rgb(123, 123, 123);
-         }
-         .app .input-container .icon.hidden {
-         transform: translateX(80%) translateY(-50%);
-         opacity: 0;
-         }
-         .app .input-container .icon svg {
-         width: 100%;
-         height: 100%;
-         fill: #222;
-         pointer-events: none;
-         }
-         @keyframes stretch-animation {
-         0% {
-         transform: scale(1, 1);
-         }
-         10% {
-         transform: scale(1.02, 0.98);
-         }
-         30% {
-         transform: scale(0.98, 1.02);
-         }
-         50% {
-         transform: scale(1.02, 0.98);
-         }
-         100% {
-         transform: scale(1, 1);
-         }
-         }
-         .child {
-         position: absolute;
-         top: 0;
-         }
-         .child-1 {
-         left: 0;
-         }
-         .child-2 {
-         left: 150px;
-         }
-         .parent {
-         position: relative;
-         }
-         body {
-         }
-         div {
-         font-family: 'sf' !important;
-         }
-         h2 {
-         font-weight: bold;
-         text-transform: uppercase;
-         letter-spacing: 0.04em;
-         padding: 0 10px;
-         margin-bottom: 5px;
-         }
-         code {
-         padding: 5px 0px;
-         }
-         .parent {
-         position: relative;
-         width: 100%;
-         height: auto;
-         }
-         .child {
-         opacity: 0.8;
-         height: 150px;
-         width: 100%;
-         position: absolute;
-         top: 0;
-         }
-         .child1 {
-         left: 0;
-         }
-         .child2 {
-         left: 0px;
-         }
-         @keyframes spin {
-         0% { transform: rotate(0deg); }
-         100% {  transform: rotate(359deg); }
-         }
-         .spinning {
-         animation: spin 2s linear infinite;
-         }
-         .definition{
-         background-color: whitesmoke;
-         font-size: 18px;
-         padding: 1em;
-         margin-bottom: 1em;
-         }
-         div:focus{
-         outline: none;
-         }
-         .button-62 {
-         background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
-         border: 0;
-         border-radius: 12px;
-         color: #FFFFFF;
-         display: inline-block;
-         font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-         font-size: 16px;
-         font-weight: 500;
-         line-height: 2.5;
-         outline: transparent;
-         padding: 0 1rem;
-         text-align: center;
-         text-decoration: none;
-         transition: box-shadow .2s ease-in-out;
-         white-space: nowrap;
-         transition: 1s;
-         }
-         .button-62:not([disabled]):focus {
-         box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
-         }
-         .button-62:hover {
-         /* box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5); */
-         transform: scale(1.02);
-         }
-         .onboard-card{
-         margin-top: 5em;
-         position: relative;
-         z-index: 1;
-         border-radius: 12px;
-         margin-bottom: 0px;
-         }
-         .top-intro{
-         text-align: center;
-         font-size: 18px;
-         color: rgba(55, 53, 47, 0.65);
-         padding-top: 46px;
-         }
-         .stackedCard{
-         box-shadow:
-         /* The top layer shadow */
-         0 1px 1px rgba(0,0,0,0.15),
-         /* The second layer */
-         0 10px 0 -5px #eee,
-         /* The second layer shadow */
-         0 10px 1px -4px rgba(0,0,0,0.15),
-         /* The third layer */
-         0 20px 0 -10px #eee,
-         /* The third layer shadow */
-         0 20px 1px -9px rgba(0,0,0,0.15);
-         }
-         .title-intro{
-         text-align: center;
-         font-weight: 700;
-         font-size: 28px;
-         margin: 0px auto;
-         }
-         .onboard-flex-container{
-         display: flex;
-         margin-top: 32px;
-         display: flex;
-         margin-top: 32px;
-         }
-         .onboard-flex-container-left{
-         width: 330px;
-         margin-left: 32px;
-         }
-         .onboard-flex-container-left-highlight{
-         transition: all 0.2s ease 0s;
-         display: flex;
-         border-radius: 6px;
-         margin-bottom: 30px;
-         background: white;
-         box-shadow: rgb(15 15 15 / 2%) 0px 0px 0px 1px, rgb(15 15 15 / 5%) 0px 4px 8px, rgb(15 15 15 / 10%) 0px 12px 32px;   
-         }
-         .onboard-flex-container-left-normal{
-         transition: all 0.2s ease 0s;
-         display: flex;
-         border-radius: 6px;
-         margin-bottom: 10px;
-         background-color: #5d5d5d;
-         color: white;
-         }
-         .footer-container{
-         display: flex;
-         padding: 20px;
-         align-items: center;
-         }
-         .footer-bulk{
-         display: flex;
-         color: rgba(55, 53, 47, 0.65);
-         font-size: 14px;
-         width: 100%;
-         }
-         .footer-bulk-link{
-         display: block;
-         color: inherit;
-         text-decoration: none;
-         width: max-content;
-         }
-         .scrolling-wrapper {
-         overflow-x: scroll;
-         overflow-y: hidden;
-         white-space: nowrap;
-         }
-         #parent02{
-         color: rgba(255, 0, 0, 0);
-         } 
-         .card {
-         display: inline-block;
-         width: 20em;
-         }
-         .blurThis{
-         background-color: rgb(214 214 214 / 0%);
-         -webkit-backdrop-filter: blur(4px);
-         -o-backdrop-filter: blur(4px);
-         -moz-backdrop-filter: blur(4px);
-         backdrop-filter: blur(4px);
-         }
-         body{
-         font-family: 'sf' !important;
-         }
-         div:focus{
-         outline: none;
-         }
-         .medium-toolbar-arrow-under:after {
-         border-width: 8px 8px 0px;
-         border: #ffffff00;
-         }
-         b {
-         color: #252525;
-         }
-      </style>
-      <style>
-         h2:focus{
-         outline: none
-         }
-         #playGround button{
-         font-size: 17px;
-         padding: 0px;
-         margin-right: 5.8px;
-         letter-spacing: 1px;
-         margin-top: 4px;
-         }
-         div:focus{
-         outline: none
-         }
-         @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&display=swap");
-         html {
-         box-sizing: border-box;
-         }
-         *,
-         *:before,
-         *:after {
-         box-sizing: inherit;
-         }
-         html,
-         body {
-         height: 100%;
-         width: 100%;
-         }
-         body {
-         }
-         .navigation-container {
-         position: relative;
-         width: 275px;
-         }
-         .navigation-collapse-trigger {
-         bottom: 0;
-         position: absolute;
-         right: -10px;
-         top: 0;
-         width: 20px;
-         }
-         .navigation-collapse-trigger__orb {
-         position: absolute;
-         width: 25px;
-         height: 25px;
-         border-radius: 25px;
-         background-color: #408bff;
-         z-index: 1;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         left: 50%;
-         transform: translate(calc(-50% + 2px), 100px) scale(0);
-         transition: all 0.2s ease-out;
-         transition-delay: 0.1s;
-         }
-         .navigation-collapse-trigger__orb:hover {
-         cursor: pointer;
-         }
-         .navigation-collapse-trigger__orb > svg {
-         stroke: #ffffff;
-         width: 80%;
-         height: auto;
-         transition: transform 0.2s ease-out;
-         }
-         [class$="--collapsed"] .navigation-collapse-trigger__orb > svg {
-         transform: rotate(180deg);
-         }
-         .navigation-collapse-trigger:hover .navigation-collapse-trigger__orb {
-         transform: translate(calc(-50% + 2px), 100px) scale(1);
-         }
-         .navigation-collapse-trigger:hover ~ .navigation::before {
-         opacity: 1;
-         }
-         .navigation {
-         color: #ffffff;
-         border-right: 1px solid rgb(213, 213, 213);
-         height: 90vh;
-         min-height: 650px;
-         padding: 16px;
-         display: flex;
-         flex-direction: column;
-         }
-         .navigation::before {
-         background: linear-gradient(180deg, rgba(64, 139, 255, 0) 0%, #408bff 5%, #408bff 95%, rgba(64, 139, 255, 0) 100%);
-         bottom: 0;
-         pointer-events: none;
-         position: absolute;
-         right: -3px;
-         top: 0;
-         width: 2px;
-         content: "";
-         opacity: 0;
-         transition: opacity 0.2s ease-out;
-         transition-delay: 0.1s;
-         }
-         .navigation .logout {
-         margin-top: auto;
-         }
-         .navigation-logo {
-         color: #ffffff;
-         text-decoration: none;
-         font-size: 24px;
-         font-weight: 500;
-         display: flex;
-         align-items: center;
-         margin: 8px;
-         margin-bottom: 30px;
-         }
-         .navigation-logo__icon {
-         min-width: 32px;
-         }
-         .navigation-logo svg {
-         margin-right: 8px;
-         }
-         .navigation-search {
-         margin-bottom: 24px;
-         position: relative;
-         }
-         .navigation-search__icon {
-         height: 25px;
-         left: 10px;
-         opacity: 1;
-         pointer-events: none;
-         position: absolute;
-         top: 10px;
-         transition: all 0.1s ease-out;
-         width: 25px;
-         z-index: 1;
-         }
-         [class$="--collapsed"] .navigation-search__icon {
-         left: 12px;
-         }
-         .navigation-search__input {
-         background-color: #2c2a30;
-         border-radius: 5px;
-         border: 0;
-         color: #ffffff;
-         font-family: inherit;
-         font-size: inherit;
-         height: 45px;
-         line-height: 45px;
-         outline: none;
-         padding-left: 50px;
-         transition: all 0.2s ease-out;
-         width: 100%;
-         position: relative;
-         z-index: 1;
-         }
-         .navigation-search__input::-webkit-search-cancel-button {
-         -webkit-appearance: none;
-         background: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x' %3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") no-repeat center center/cover;
-         cursor: pointer;
-         height: 20px;
-         position: relative;
-         right: 10px;
-         width: 20px;
-         }
-         [class$="--collapsed"] .navigation-search__input:not(:focus)::-webkit-search-cancel-button {
-         display: none;
-         }
-         .navigation-search__input:focus {
-         padding-left: 10px;
-         background-color: #313239;
-         border-radius: 5px;
-         }
-         [class$="--collapsed"] .navigation-search__input:focus {
-         width: 250px;
-         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-         }
-         .navigation-search__input:focus + svg {
-         opacity: 0;
-         transform: translateX(-20%);
-         z-index: 2;
-         }
-         .navigation-link {
-         display: block;
-         color: #9e9fa4;
-         display: flex;
-         align-items: center;
-         padding: 0 8px;
-         height: 45px;
-         line-height: 45px;
-         border-radius: 5px;
-         text-decoration: none;
-         transition: all 0.2s ease-out;
-         white-space: nowrap;
-         }
-         .navigation-link__icon {
-         min-width: 32px;
-         }
-         .navigation-link__name {
-         margin-left: 12px;
-         }
-         [class$="--collapsed"] .navigation-link__name {
-         padding: 0.5em;
-         line-height: 1;
-         border-radius: 3px;
-         color: #6b6b6b;
-         transition: transform 0.2s ease-out;
-         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-         pointer-events: none;
-         position: absolute;
-         left: 48px;
-         }
-         [class$="--collapsed"] .navigation-link__name::before {
-         width: 0;
-         height: 0;
-         border-top: 5px solid transparent;
-         border-right: 7px solid #ffffff;
-         border-bottom: 5px solid transparent;
-         left: -7px;
-         position: absolute;
-         top: 50%;
-         transform: translateY(-50%);
-         }
-         .navigation-link:hover {
-         background-color: #313239;
-         color: #ffffff;
-         }
-         [class$="--collapsed"] .navigation-link:hover .navigation-link__name {
-         position: absolute;
-         opacity: 1 !important;
-         font-size: 0.875rem;
-         transform: translateX(4px);
-         background: #ffffff;
-         left: 60px;
-         }
-         [class$="--collapsed"] .navigation-link:hover .navigation-link__name::before {
-         content: "";
-         }
-         .child1{
-         height: 1px;
-         }
-         .flagg{
-         border-bottom: 2px solid black;
-         }
-         div#medium-editor-toolbar-1{
-         display: inline-flex;
-         align-items: stretch;
-         height: fit-content;
-         background: white;
-         overflow: visible;
-         font-size: 14px;
-         line-height: 1.2;
-         border-radius: 3px;
-         box-shadow: rgb(15 15 15 / 5%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 3px 6px, rgb(15 15 15 / 20%) 0px 9px 24px;
-         pointer-events: auto;
-         }
-         .medium-toolbar-arrow-under:after {
-         border-width: 0px;
-         }
-         .medium-editor-table{
-         width:-webkit-fill-available ;
-         }
-         .medium-editor-table-builder-cell {
-         background-color: #fff;
-         border: 1px solid whitesmoke;
-         display: block;
-         float: left;
-         height: 16px;
-         margin: 0;
-         width: 16px;
-         }
-         .medium-editor-table-builder-cell.active, .medium-editor-table-builder-cell:hover {
-         background-color: #ececec;
-         }
-         .medium-editor-table-builder-cell {
-         background-color: #fff;
-         border: 1px solid whitesmoke;
-         display: block;
-         float: left;
-         height: 16px;
-         margin: 0;
-         width: 16px;
-         }
-         .medium-editor-table-builder-grid {
-         border: none;
-         border-radius: 3px;
-         overflow: hidden;
-         border-radius: 3px;
-         box-shadow: rgb(15 15 15 / 5%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 3px 6px, rgb(15 15 15 / 20%) 0px 9px 24px;
-         background-color: white;
-         }
-         .medium-editor-table, .medium-editor-table td {
-         border: 1px solid #f1f1f1;
-         padding: 4px;
-         }
-         .medium-editor-action{
-         user-select: none;
-         transition: background 20ms ease-in 0s;
-         cursor: pointer;
-         display: flex;
-         align-items: center;
-         padding: 0px 8px;
-         white-space: nowrap;
-         box-shadow: rgb(55 53 47 / 9%) 1px 0px 0px;
-         margin-right: 1px;
-         }
-         button{
-         border: none;
-         background-color: #ffffff00;
-         }
-         .medium-editor-toolbar li button {
-         box-sizing: border-box;
-         cursor: pointer;
-         display: block;
-         font-size: 14px;
-         line-height: 1.33;
-         margin: 0;
-         padding: 5px 16px;
-         text-decoration: none;
-         }
-      </style>
-      <script>
-         var globalWhere = $("#from").text()
+        
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+            document.getElementById("main_container").style.marginLeft = "0px";
+            document.getElementById("toggle_containers").style.display = "flex";
+            document.getElementById("fold").style.marginLeft = "300px";
+            document.getElementById("topTriggers").style.paddingLeft = "300px";
+            document.getElementById("mena").style.stroke = "black";
+        }
          
-         var qrc = new QRCode(document.getElementById("qrcode"), {
-         	text: `unused!`,
-         	colorDark : "#000000",
-         	colorLight : "#f9fafb",
-         	correctLevel : QRCode.CorrectLevel.H
-         });
+        document.getElementById("main_container2").style.width = "0";
+        document.getElementById("sida").style.stroke = "black";
          
-             function spza(where){
-             console.log(where)
-             console.log((where + "1"))
-             setTimeout(() => {
-                 document.getElementsByClassName(where + "1").style.backgroundColor = "black"
-                 document.getElementsByClassName(where + "1").style.color = "white"
-             
-             
-             }, 400);
-             setTimeout(() => {
-                 document.getElementsByClassName(where + "1").style.backgroundColor = ""
-                 document.getElementsByClassName(where + "1").style.color = ""
-             }, 900);
-             
-             }
-             
-             function spz(where){
-             setTimeout(() => {
-                 document.getElementById(where + "1").style.filter = "invert(1)"
-             
-             }, 400);
-             setTimeout(() => {
-                 document.getElementById(where + "1").style.filter = "invert(0)"
-             
-             }, 900);
-             
-             }
-             $(document).ready(function() {
-                 $(".hiddena").hide();
-                 openNav()
-                 var globalWhere = $("#from").text()
+        function openNav2() {
+            document.getElementById("sida").style.stroke = "gray";
+            document.getElementById("fold").style.marginRight = "400px";
+            if(document.getElementById("main_container2").style.width == `400px`){
+                document.getElementById("main_container2").style.width = `0`;
+            } else {
+                document.getElementById("main_container2").style.width = `400px`
+            }
+        }
          
-         
-                 var k = "parent"
-                 called(k)
-         
-         
-                 
-          
-         
-             })
-         
-         
-         
-             function chaseSideNotes(){
-                 var p = document.getElementsByClassName("pickUP")
-         
-              
-         
-                 for (var i=0; i < p.length; i++) {
-                     console.log(p[i].textContent)
-                     sidebarsa.push(p[i].textContent)
-         
-                 }
-                 return sidebarsa
-         
-             }
-             
-             
-             $('.master').hover(
-             function () {
-             $('.master').css("width", "9em")
-             $(".hiddena").fadeIn();
-             }, 
-             function () {
-             $(".hiddena").fadeOut();
-             $('.master').css("width", "fit-content")
-             
-             }
-             );
-             
+        function closeNav2() {
+            document.getElementById("fold").style.marginRight = "10px";
+            document.getElementById("main_container2").style.width = "0";
+            document.getElementById("fold").style.marginRight = "0";
+            document.getElementById("main_container").style.width =  `-webkit-fill-available`;
+            document.getElementById("sida").style.stroke = "black";
+        }
       </script>
+
       <script>
-         function MediumButton(options) {
-         if (options.label === undefined || !/\S{1}/.test(options.label) ||
-             options.start === undefined || !/\S{1}/.test(options.start) ||
-             options.end === undefined || !/\S{1}/.test(options.end)) {
-         
-             if (options.label === undefined || !/\S{1}/.test(options.label) ||
-                 options.action === undefined || !/\S{1}/.test(options.action)) {
-                 console.error('[Custom-Button] You need to specify "label", "start" and "end" OR "label" and "action"')
-                 return
-             }
-         }
-         
-         options.start = (options.start === undefined) ? '' : options.start
-         options.end = (options.end === undefined) ? '' : options.end
-         
-         var self = this
-         this.options = options
-         this.button = document.createElement('button')
-         this.button.className = 'medium-editor-action'
-         this.button.innerHTML = options.label
-         this.button.onclick = function() {
-             // get current selectet text
-             var html = getCurrentSelection()
-             var sel = window.getSelection()
-             var parent = sel.anchorNode.parentElement
-         
-             // modify content
-             var mark = true
-             if (options.start === undefined || html.indexOf(options.start) == -1 && html.indexOf(options.end) == -1) {
-         
-                 if (options.action != undefined) html = options.action(html, true, parent)
-                 html = options.start + html + options.end
-         
-             } else { // clean old
-         
-                 if (options.action != undefined) html = options.action(html, false, parent)
-                 html = String(html).split(options.start).join('')
-                 html = String(html).split(options.end).join('')
-         
-             }
-         
-         
-             var range
-             var fragment
-                 //Set new Content
-             if (sel.getRangeAt && sel.rangeCount) {
-         
-                 range = window.getSelection().getRangeAt(0)
-                 range.deleteContents()
-         
-                 if (range.createContextualFragment) fragment = range.createContextualFragment(html)
-                 else {
-                     var div = document.createElement('div')
-         
-                     div.innerHTML = html
-                     fragment = document.createDocumentFragment()
-                     while ((child = div.firstChild)) fragment.appendChild(child)
-         
-                 }
-         
-                 var firstInsertedNode = fragment.firstChild
-                 var lastInsertedNode = fragment.lastChild
-                 range.insertNode(fragment)
-         
-                 if (firstInsertedNode) {
-                     range.setStartBefore(firstInsertedNode)
-                     range.setEndAfter(lastInsertedNode)
-                 }
-         
-                 sel.removeAllRanges()
-                 sel.addRange(range)
-         
-             }
-         
-             self.base.checkContentChanged()
-         
-         }
-         
-         }
-         
-         MediumButton.prototype.getButton = function() {
-         return this.button
-         }
-         
-         MediumButton.prototype.checkState = function(node) {
-         var html = getCurrentSelection()
-         
-         if (this.options.start != '' && html.indexOf(this.options.start) > -1 && html.indexOf(this.options.end) > -1) {
-             this.button.classList.add('medium-editor-button-active')
-         } else {
-             this.button.classList.remove('medium-editor-button-active')
-         }
-         
-         }
-         
-         function getCurrentSelection() {
-         var html = ''
-         var sel
-         
-             if (typeof window.getSelection != 'undefined') {
-                 sel = window.getSelection()
-                 if (sel.rangeCount) {
-                     var container = document.createElement('div')
-                     for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-                         container.appendChild(sel.getRangeAt(i).cloneContents())
-                     }
-                     html = container.innerHTML
-                 }
-             } else if (typeof document.selection != 'undefined') {
-                 if (document.selection.type == 'Text') {
-                     html = document.selection.createRange().htmlText
-                 }
-             }
-             return html
-         
-         }
-         
-         if (typeof exports !== 'undefined') {
-         if (typeof module !== 'undefined' && module.exports) {
-         exports = module.exports = MediumButton
-         }
-         exports.MediumButton = MediumButton
-         }
-         
-         function reduceHoldStrings(){
-             var uni = [... new Set(holdStrings)]
-             var cleaner = []
-             uni.forEach(element => {
-                 if (element == null){
-         
-                 } else if(element == undefined) {
-                     
-                 } else {
-                     cleaner.push(element)
-                 }
-             });
-             holdStrings = cleaner
-             console.log(holdStrings, "unique strings")
-         }
-         
-         
-            
-          
-             function updateSideUserNoteNew(name){
-                 var contento = document.getElementById(name).innerHTML
-                 console.log(name)
-                 io = name.replace(" ", "_")
-                 console.log(io, name, "inserting user note")
-                 
-             }
-         
-             function updateSideUserNote(where){
-                 var contento = document.getElementById(where).innerHTML
-                 var train = $("#train").text()
-                 console.log(train, "updating user note")
-             }
-         
-         
-             var editor = new MediumEditor('.editable', {
-                 buttonLabels: 'fontawesome',
-                 extensions: {
-                     table: new MediumEditorTable(),
-                     'pop': new MediumButton({
-                     label: '✍️',
-                     action: function (html, mark, id ) {
-                             var upandgoing = "vaseline"
-                             var randInt4 =   Math.floor(Math.random()*90000) + 10000;
-                             var randInt5 =   randInt4 + 1
-         
-                             var randInt2 =   Math.floor(Math.random()*90000) + 10000;
-                             var randInt7 =   Math.floor(Math.random()*90000) + 10000;
-         
-                             var randInt9 =   Math.floor(Math.random()*90000) + 10000;
-                             var randInt8 =   randInt9 - 1
-         
-                             var randInt3 =   randInt2 + 1
-         
-         
-                         
-                                 if(keywords.includes(html)){ 
-                                     console.log(data, html, "done")
-         
-                                     var html_ = html.replace(" ", "_")
-                                         console.log(html_, "html_")
-                                     if (data.payload == false ){
-         
-                                 $("#sidebar").prepend(`
-                         
-         
-         
-                     <div id="vaseline">
-                         <div id=${randInt8}  class="group relative overflow-hidden md:first:row-span-2 group flex flex-col border border-orange-50 dark:border-gray-900 px-3 pb-4 pt-6 2x:pt-10 rounded-xl bg-gradient-to-r from-orange-500/5 to-white dark:from-gray-850 dark:to-gray-950 dark:hover:from-gray-800 hover:shadow-alternate shadow-none transition-shadow"><div class="transform transition-transform group-hover:-translate-y-24 hidden group-first:block absolute w-[550px] h-16 md:h-24 rotate-45 bg-red-500/10 dark:bg-white/10 blur-3xl"></div>
-                             <div class="font-semibold text-lg flex items-center mt-auto mb-2 relative">
-                                 <span class="group-hover:underline">${html}</span></div>
-         
-         
-                                 <div class="text-lg flex items-center" style="width: 100% !important;  text-transform: capitalize">
-                                 
-                                     <div class="mx-auto"></div>
-         
-                                     <div class="" onclick="del(this.id)" id=${randInt9} style="">
-                                         <button type="button" class="tag tag-red px-3" data-dismiss-target="#alert-additional-content-1" aria-label="Close">
-                                             Dismiss
-                                         </button>
-                                     </div>
-                                 </div>
-         
-                             <div class="font-normal text-smd text-gray-400 pr-4 relative">
-                                 
-                                 
-                                 
-                                 <div class="mt-2">
-                                     <div class="">
-                                         <div class="editable editables1 tabable" id=${html_} onkeyup="updateSideUserNoteNew(this.id)">...</div>
-                                     </div>
-                                 </div>
-                                 <div class="mt-auto pt-4 flex items-center text-xs text-gray-500">
-                                     <div class="mt-auto pt-4 items-center text-xs text-gray-500">
-                                         <div id="toast-simple" class="tag tag-yellow" role="alert">
-                                             <span class="">User definition.</span>
-                                         </div>
-                                     </div>
-                             
-                                 </div>
-                                     
-                             </div>
-                         </div>
-                     </div>
-         
-         
-                             `)
-                                     refireEditor()
-                     
-         
-                                     $('.sidebar > div').on('keydown', function(e){
-                                     if(e.keyCode == 9){
-                                         e.preventDefault();
-                                         document.execCommand('insertHTML', false, '&#009');
-                                     }
-                                     }).css('white-space', 'pre-wrap');
-         
-                                         } else {
-         
-                                             var thisContent = data.payload.content
-                                             var html_ = html.replace(" ", "_")
-                                             console.log(html_, "html_")
-                                             $("#sidebar").prepend(`
-                             
-         
-         
-                             <div id=${randInt8}  class="group relative overflow-hidden md:first:row-span-2 group flex flex-col border border-orange-50 dark:border-gray-900 px-3 pb-4 pt-6 2x:pt-10 rounded-xl bg-gradient-to-r from-orange-500/5 to-white dark:from-gray-850 dark:to-gray-950 dark:hover:from-gray-800 hover:shadow-alternate shadow-none transition-shadow"><div class="transform transition-transform group-hover:-translate-y-24 hidden group-first:block absolute w-[550px] h-16 md:h-24 rotate-45 bg-red-500/10 dark:bg-white/10 blur-3xl"></div>
-                                 <div class="font-semibold text-lg flex items-center mt-auto mb-2 relative"> 
-                                     <span class="group-hover:underline">${html}</span></div>
-         
-         
-                                     <div class="text-lg flex items-center" style="width: 100% !important;  text-transform: capitalize">
-                                     
-                                         <div class="mx-auto"></div>
-         
-                                         <div class="" onclick="del(this.id)" id=${randInt9} style="">
-                                             <button type="button" class="tag tag-red px-3" data-dismiss-target="#alert-additional-content-1" aria-label="Close">
-                                                 Dismiss
-                                             </button>
-                                         </div>
-                                     </div>
-         
-                                 <div class="font-normal text-smd text-gray-400 pr-4 relative">
-                                     
-                                     
-                                     
-                                     <div class="mt-2">
-                                         <div class="">
-                                             <div class="editable" id=${html_} onkeyup="updateSideUserNoteNew(this.id)">${thisContent}</div>
-                                         </div>
-                                     </div>
-                                     <div class="mt-auto pt-4 flex items-center text-xs text-gray-500">
-                                         <button class="flex items-center text-gray-300">
-                                     
-                                             User Definitiona
-                                         </button>
-                                 
-                                     </div>
-                                         
-                                 </div>
-                             </div>
-                     
-                                 `)
-                                     $('[contenteditable]').on('keydown', function(e){
-                                         if(e.keyCode == 9){
-                                             e.preventDefault();
-                                             document.execCommand('insertHTML', false, '&#009');
-                                         }
-                                     }).css('white-space', 'pre-wrap');
-                                                             refireEditor()
-                                         }
-                                 
-         
-         
-                             
-                             } else {
-                                 console.log("not done")
-                             }
-                             
-         
-                         return html
-                     },
-                     start: `<span class="" spellcheck="false" style="border-bottom: 2px solid #93a4d7">`, end: `</span>`
-                     })
-                 },
-                 toolbar: {
-                 buttons: [
-                     'h2',
-                     'bold',
-                     'italic',
-                     'unorderedlist',
-                     'orderedlist',
-                     'table',
-                     'pop'
-                 ]
-                 }
-             });
-      </script>
-      <script>
-         $('[contenteditable]').on('keydown', function(e){
-             if(e.keyCode == 9){
-                 e.preventDefault();
-                 document.execCommand('insertHTML', false, '&#009');
-             }
-         }).css('white-space', 'pre-wrap');
-                                             var trackSides = []
-         
-                                             var tempPushed = []
-                 $(document).ready(() => {   
-         
-         
-         
-         
-                     
-                       called()
-         
-                       document.getElementById("parent").innerHTML = $("#minicParent").text()
-         
-         
-         
-                       var f = document.getElementById("ghostNotes").textContent
-                       var c = f.split(",")
-                       var l = []
-         
-                       c.forEach(element => {
-                         element.replace("\n", "")
-                         l.push(element.trim())
-                       });
-         
-                       tempPushed = l
-                       console.log(l, "llll")
-         
-                       l.forEach(element => {
-                         if(keywords.includes(element)){
-                             console.log(data.payload, 'kkk')
-                             var  thisContent = element
-                             var titla = element
-                             var where = element
-         
-                         
-                         
-                                 randInt9 =   Math.floor(Math.random()*90000) + 10000;
-                                 var randInt10 =   Math.floor(Math.random()*90000) + 10000;
-             
-                                 var randInt8 =   randInt9 - 1
-         
-                                 $("#sidebar").prepend(`
-                                 <div id=${data.payload.name}  class="group relative overflow-hidden md:first:row-span-2 group flex flex-col border border-orange-50 dark:border-gray-900 px-3 pb-4 pt-6 2x:pt-10 rounded-xl bg-gradient-to-r from-orange-500/5 to-white dark:from-gray-850 dark:to-gray-950 dark:hover:from-gray-800 hover:shadow-alternate shadow-none transition-shadow"><div class="transform transition-transform group-hover:-translate-y-24 hidden group-first:block absolute w-[550px] h-16 md:h-24 rotate-45 bg-red-500/10 dark:bg-white/10 blur-3xl"></div>
-                                     <div class="font-semibold text-lg flex items-center mt-auto mb-2 relative"> 
-                                         <span class="group-hover:underline" style="TEXT-TRANSFORM: CAPITALIZE;">${data.payload.name}</span></div>
-                                         <span class="group-hover:underline" style="display: none">${where}</span>
-         
-             
-                                         <div class="text-lg flex items-center" style="width: 100% !important;  text-transform: capitalize">
-                                     
-                                             <div class="mx-auto"></div>
-             
-                                            
-                                         </div>
-             
-                                     <div class="font-normal text-smd text-gray-400 pr-4 relative">
-                                         
-                                         
-                                         
-                                         <div class="mt-2">
-                                             <div class="">
-                                                 <div class="editable" id=${where} onkeyup="updateSideUserNote(this.id)">${thisContent}</div>
-                                             </div>
-                                             <span class="pickUP" style="display: none">${where}</span>
-                                         </div>
-                                         <div class="mt-auto pt-4 items-center text-xs text-gray-500">
-              
-                                             <div id="toast-simple" class="tag tag-green" role="alert">
-                                                 <span class="">Inherited definition</span>
-                                             </div>
-                                     
-                                         </div>
-                                             
-                                     </div>
-                                 </div>
-         
-                             `)
-                             refireEditor()
-                                 
-                             trackSides.push([titla, 0])
-                                     
-                         } else {
-                             console.log("not done")
-                         }
-                     })
-         
-                       
-                 })
-         
-         
-                 function getWordCount(str) {
-                     return str.split(' ')
-                     .filter(function(n) { return n != '' })
-                     .length;
-                 }
-                 
-         
-         
-                 var typingTimer;
-             var doneTypingInterval = 1000;  
-             var $input = $('#parent');
-             var cursor_pos 
-         
-         
-         function getCaretPosition() {
-             var elem = document.getElementById("parent")
-           var sel = window.getSelection();
-           var cm_length = [0, 0];
-         
-           if(sel.anchorNode == elem)
-             cm_length = [sel.anchorOffset, sel.extentOffset];
-           else {
-             var nodes_to_find = [sel.anchorNode, sel.extentNode];
-             if(!elem.contains(sel.anchorNode) || !elem.contains(sel.extentNode))
-               return undefined;
-             else {
-               var found = [0,0];
-               var i;
-               node_walk(elem, function(node) {
-                 for(i = 0; i < 2; i++) {
-                   if(node == nodes_to_find[i]) {
-                     found[i] = true;
-                     if(found[i == 0 ? 1 : 0])
-                       return false; // all done
-                   }
-                 }
-         
-                 if(node.textContent && !node.firstChild) {
-                   for(i = 0; i < 2; i++) {
-                     if(!found[i])
-                       cm_length[i] += node.textContent.length;
-                   }
-                 }
-               });
-               cm_length[0] += sel.anchorOffset;
-               cm_length[1] += sel.extentOffset;
-             }
-           }
-         
-           if(cm_length[0] <= cm_length[1]){
-             console.log("JC", cm_length)
-             $("#caretposition").html(cm_length)
-             cursor_pos = parseFloat(cm_length[1]) 
-         
-             return cm_length;
-           } else {
-             $("#caretposition").html(cm_length[1])
-             console.log("JC", cm_length[1], cm_length[0])
-             cursor_pos = parseFloat(cm_length[1])
-             return [cm_length[1], cm_length[0]];
-         
-           }
-         }
-         
-         
-         //on keyup, start the countdown
-         $input.on('keyup', function () {
-           clearTimeout(typingTimer);
-         
-           getCaretPosition()
-         
-         
-           typingTimer = setTimeout(doneTyping, doneTypingInterval);
-         });
-         
-         //on keydown, clear the countdown 
-         $input.on('keydown', function () {
-         
-           clearTimeout(typingTimer);
-         });
-         
-         
-         function node_walk(node, func) {
-           var result = func(node);
-           for(node = node.firstChild; result !== false && node; node = node.nextSibling)
-             result = node_walk(node, func);
-           return result;
-         };
-         
-         function SetCaretPosition(el, pos){
-             console.log(el, pos, "here")
-             // Loop through all child nodes
-             for(var node of el.childNodes){
-                 if(node.nodeType == 3){ // we have a text node
-                     if(node.length >= pos){
-                         // finally add our range
-                         var range = document.createRange(),
-                             sel = window.getSelection();
-                         range.setStart(node,pos);
-                         range.collapse(true);
-                         sel.removeAllRanges();
-                         sel.addRange(range);
-                         return -1; // we are done
-                     }else{
-                         pos -= node.length;
-                     }
-                 }else{
-                     pos = SetCaretPosition(node,pos);
-                     if(pos == -1){
-                         return -1; // no need to finish the for loop
-                     }
-                 }
-             }
-             return pos; // needed because of recursion stuff
-         }
-         
-         //user is "finished typing," do something
-         function doneTyping () {
-         
-             underline()
-             var elem = document.getElementById("parent")
-             SetCaretPosition(elem, cursor_pos)
-         
-         }
-         
-         
-             function tiger(x){
-                 console.log("gopne")
-                 var y = document.getElementById(x).textContent
-                 console.log(x, y)
-                 document.getElementById(y).scrollIntoView()
-                 document.getElementById("main_container2").style.width = `400px`
-         
-                 
-             }
-         
-         
-             function underline(){
-                 console.log(trackSides, trackSides[0], "d01")
-              
-                 for (let i = 0; i < trackSides.length; i++) {
-                     if(trackSides[i][1] == 0 ){
-                         var inputText = document.getElementById("parent");
-                         //? put in loop????? I Guess so.
-                         var innerHTML = inputText.innerHTML;
-                         //message
-                         console.log(`we are going to update ${trackSides[i][0]} from: ${trackSides[i][1]} to ${parseInt(trackSides[i][1]) + 1} `)
-                         trackSides[i][1] = 1
-                         //logic
-                         var randInt =   Math.floor(Math.random()*90000) + 10000;
-                         var abc = trackSides[i][0]  
-                         var index = innerHTML.indexOf(abc); 
-                         
-                         let func2 = () => alert('inline' + randInt);
-                         $("#" + randInt).click(func2);
-                 
-         
-                         innerHTML = innerHTML.substring(0,index) + `<span onclick=tiger(${randInt}) style="border-bottom: 2px solid pink" id=${randInt}>${abc}</span>` + innerHTML.substring(index + abc.length);
-                         inputText.innerHTML = innerHTML;
-                   
-                   
-         
-                   
-         
-                     } else {
-                         console.log(`we will ignore ${trackSides[i][0]} as it is regisitered as  ${trackSides[i][1]}`)
-                     }
-                 }
-                 // if(trackSides.length > 1){
-                 //     console.log("refired ", trackSides, trackSides[0])
-                 //     for (let i = 0; i < trackSides.length; i++) {
-                 //         console.log(trackSides[i], "?")
-                         
-                 //     }
-                 //     for (let i = 0; i < trackSides.length; i++) {
-                 //         const element = trackSides[i][0];
-                 //         if(trackSides[i][1] == 1){
-                 //             console.log("will NOT underline")
-                 //         } else {
-                 //             console.log(trackSides[i], trackSides, "?")
-                 //             console.log("can underline")
-                 //             trackSides[i][1] = 1
-         
-                 //         }
-                         
-                 //         // if(trackSides[i][0] == 0){
-                 //         //     var text = element
-                 //         //     var inputText = document.getElementById("parent");
-                 //         //     var innerHTML = inputText.innerHTML;
-                 //         //     var index = innerHTML.indexOf(text);
-                 //         //     console.log(element, text, index, "nnm")
-                 //         //     const j = text
-                 //         //     const sentence = 'Give me the count of all words in this sentence!';
-                 //         //     var g  = []
-         
-                 //         //     if (index >= 0) { 
-                 //         //         console.log(index, element, "jacob", ($("#" + text).length))
-                 //         //         var myDiv = document.getElementById(text);
-                 //         //         if ( myDiv ) {
-                 //         //             console.log(`${text} appears to exist in sidebar`)
-         
-                 //         //             //
-                 //         //             var myDiv2 = document.getElementById(text + "1");
-                 //         //             if(myDiv2){
-                 //         //                                 //exists in sidebar and is underlined
-                 //         //                 // console.log((element + "1"), " exists")
-         
-                                 
-                 //         //             } else {
-         
-         
-         
-                 //         //                 //It exists in sidebar, but is not underlined
-                 //         //                 // var randInt =   Math.floor(Math.random()*90000) + 10000;
-         
-                 //         //                 // var abc = text               
-                 //         //                 // var x = document.createElement("span");
-                 //         //                 // x.innerHTML = `${abc}`
-                 //         //                 // x.style = `border-bottom: 2px solid pink`
-         
-                 //         //                 // innerHTML = innerHTML.substring(0,index) + `<span id=${randInt}> </span>` + innerHTML.substring(index + text.length);
-                 //         //                 // inputText.innerHTML = innerHTML;
-                 //         //                 // inputText.onclick = function () {
-                 //         //                 //     console.log(j)
-                 //         //                 //     document.getElementById(j).scrollIntoView()
-                 //         //                 //     console.log(j, text, randInt, "kkl")
-         
-                 //         //                 //         document.getElementById("main_container2").style.width = `400px`
-                                     
-                 //         //                 // };
-         
-         
-                 //         //                 // if($('#' + randInt).parent().is('#parent p') == true){
-                 //         //                 //     console.log("can apppend")
-                 //         //                     // document.getElementById(randInt).appendChild(x)
-                 //         //                     // trackSides[i][1] = 1
-                 //         //                     // console.log(trackSides)
-                 //         //                 // } else {
-                 //         //                 //     console.log("cant apppend")
-         
-                 //         //                 // }
-         
-                 //         //             }
-                 //         //         } else {
-                 //         //             console.log("was caught")
-         
-                             
-         
-                 //         //         console.log(`flagged, ${text} should be underlined`)
-                 //         //         } 
-         
-         
-                 //         //     } else {
-         
-                 //         //     }
-                             
-                 //         //     console.log(g)
-                 //         // }
-                 //     };
-                 // }
-                 // console.log(trackSides, "d02")
-         
-             }
-         
-                 // function man_func(){
-         
-                 //             var k = document.querySelectorAll('.flagg')
-                 //             k.forEach(element => {
-                 //                 console.log(element.textContent, "3344")
-                 //                 element.onclick = function () {
-                 //                     console.log((element.textContent).toLowerCase())
-                 //                     document.getElementById(element.textContent).scrollIntoView()
-                 //                     document.getElementById(element.id) = element.textContent + "2"
-         
-                 //                     document.getElementById(element.textContent).style.backgroundColor = "#edf5f1"
-                 //                     };
-                 //             });
-                 
-                 // }
-                 var holdStrings = []
-                 var history_array = ["yea"]
-                 var keeped = []
-                 var global_kepped = []
-                 var glocount = 0
-                 var sidebarsa = []
-                 function called(){
-                         //split up
-                         saved()
-                         
-                         var current_split = split_and_clean()
-                         console.log(current_split, "111")
-                         //uniques
-                         var get_uniques = uniques(current_split)
-                         console.log(current_split, "112")
-                    
-                         var rep = []
-                         console.log(global_kepped, "gk")
-             
-                         for (let i = 0; i < global_kepped.length; i++) {
-             
-                             if(global_kepped[i][1] == 0){
-                                 
-                                 
-                                 var prevPrevWordLookup = global_kepped[i][0]
-                                 
-                                 console.log("going on: " + prevPrevWordLookup)
-                                 try {
-                                     if(keywords.include(prevPrevWordLookup) == true){
-         
-                                         
-                                         
-                                                     randInt9 =   Math.floor(Math.random()*90000) + 10000;
-                                                     var randInt10 =   Math.floor(Math.random()*90000) + 10000;
-                                 
-                                                     var randInt8 =   randInt9 - 1
-         
-                                                     $("#sidebar").prepend(`
-                                                     <div id=${prevPrevWordLookup}  class="group relative overflow-hidden md:first:row-span-2 group flex flex-col border border-orange-50 dark:border-gray-900 px-3 pb-4 pt-6 2x:pt-10 rounded-xl bg-gradient-to-r from-orange-500/5 to-white dark:from-gray-850 dark:to-gray-950 dark:hover:from-gray-800 hover:shadow-alternate shadow-none transition-shadow">
-                                                         <div class="font-semibold text-lg flex items-center mt-auto mb-2 relative"> 
-                                                             <span class="group-hover:underline">4443</span></div>
-                                                             <span class="group-hover:underline">4442</span>
-         
-                                 
-                                                             <div class="text-lg flex items-center" style="width: 100% !important;  text-transform: capitalize">
-                                                         
-                                                                 <div class="mx-auto"></div>
-                                 
-                                                        
-                                                             </div>
-                                 
-                                                         <div class="font-normal text-smd text-gray-400 pr-4 relative">
-                                                             
-                                                        
-                                                             <div class="mt-auto pt-4 items-center text-xs text-gray-500">
-                                                                 <button class=" items-center text-gray-300">
-                                                             
-                                                                     User Definition
-                                 
-                                                                 </button>
-                                                                 <div class="mt-auto pt-4 items-center text-xs text-gray-500">
-                                                                     <div id="toast-simple" class="tag tag-yellow" role="alert">
-                                                                         <span class="">User definition</span>
-                                                                     </div>
-                                                                 </div>
-                                                         
-                                                             </div>
-                                                                 
-                                                         </div>
-                                                     </div>
-                         
-                                                 `)
-         
-                                               
-                                             
-                                                 refireEditor()
-         
-                                                 trackSides.push([prevPrevWordLookup, 0])
-         
-                                     
-                                     }
-                                 } catch (error) {
-                                     
-                                 }
-         
-                                 try {
-         
-                                     
-                                 } catch (error) {
-                                     
-                                 }
-         
-                                 try {
-                               
-                                         if(keywords.includes(prevPrevWordLookup)) {
-                                             counter = 0
-                                             console.log("code9324")
-                                      
-                                             var howMany = []
-                                             var randInt4 =   Math.floor(Math.random()*90000) + 10000;
-                                             var randInt5 =   randInt4 + 1
-                                             var randInt2 =   Math.floor(Math.random()*90000) + 10000;
-                                             var randInt7 =   Math.floor(Math.random()*90000) + 10000;
-                                             var randInt9 =   Math.floor(Math.random()*90000) + 10000;
-                                             var randInt8 =   prevPrevWordLookup
-                                             var randInt3 =   randInt2 + 1
-                                             var masterDiv = document.createElement("div");
-         
-                 
-                                             $("#sidebar").prepend(`
-                                             
-                                             <div id=${prevPrevWordLookup}  class="group borderUpDown relative overflow-hidden md:first:row-span-2 group flex flex-col border border-orange-50 dark:border-gray-900 px-3 pb-4 pt-6 2x:pt-10  bg-gradient-to-r from-orange-500/5 to-white dark:from-gray-850 dark:to-gray-950 dark:hover:from-gray-800 shadow-none transition-shadow">
-                                                     <div class="flex ">
-                                                         <div class="">
-                                                             <div class="text-2xl " style="font-weight: 600; text-transform: capitalize;">${randInt3}</div>
-                                                         </div>
-                                                         <div class="mx-auto"></div>
-                                                    
-                                                   
-                                                     </div>
-                                                     <br>
-                                                 
-                                                     <div class="" style="font-size: 13px; margin-top: 7px;">
-                                                         <div class="tabable" contenteditable="true" id=${randInt7}></div>  
-                                                     </div>
-                                                     <br>
-                                                     <div class="mt-auto pt-4 items-center text-xs text-gray-500">
-                                        
-         
-                                                                 <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(64, 120, 241);">${prevPrevWordLookup}</span>       
-         
-                                                         
-                                                             </div>
-                                                 </div>
-         
-                                                 <br/>
-                                    
-                                                 <br/>
-         
-                                             `)
-                                    
-                             
-                                             document.getElementById("sidebar").appendChild(masterDiv);
-                                             refireEditor()
-                                             trackSides.push([(prevPrevWordLookup), 0])
-         
-                                         } else {
-         
-                                         }
-         
-               
-                                         
-         
-                                     refireEditor()
-         
-                                 } catch (error) {
-                                     
-                                 }
-                                 global_kepped[i][1] = 1
-                                
-                             }
-                         }
-         
-                     
-         
-                         get_uniques = rep
-                         history_array = get_uniques
-                
-                         refireEditor() 
-                         $('[contenteditable]').on('keydown', function(e){
-             if(e.keyCode == 9){
-                 e.preventDefault();
-                 document.execCommand('insertHTML', false, '&#009');
-             }
-         }).css('white-space', 'pre-wrap');
-                     }
-         
-                 function randomString(length, chars) {
-           var result = '';
-               for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-               return result;
-         }
-         
-         
-                 glocheckside = 0
-                 
-                 function saved(){
-                     var whatToSave = $('#parent').html()
-                     var whatToSaveTitle = $('#title').text().trim()
-                     var user = $('#userFrom').text()
-                     var compoundWhere = globalWhere + ":" + user
-                     b = compoundWhere.split(":")
-                     c = b[0] + ":" + user
-                     var clarifyWhere = "||" + c
-                     $("#note_id").text(c)
-                     if(glocheckside > 2){
-         
-                             oo  = chaseSideNotes()
-                             console.log(oo, "oo")
-         
-                             console.log(sidebarsa, "galaxy")
-         
-                             var uni = [... new Set(sidebarsa)]
-         
-                             console.log(uni, "galaxy02")
-         
-                             console.log("saved")
-         
-                         } else {
-                         
-                         
-                     }
-                     glocheckside++
-                 }
-         
-         
-                 function del(where){
-                     document.getElementById(parseFloat(where - 1)).style.display = "none"
-                 }
-         
-                 function hideThem(where){
-                     console.log("trig show ", where)
-                     var getIDS = []
-                     var tags = document.getElementById(where).getElementsByTagName("div")
-                     document.getElementById(tags[0].id).style.display = "block"
-                 }
-         
-                 var count = 1
-                 
-         
-         
-                 function uniques(array){
-                     var uni = [... new Set(array)]
-                     var metauni = []
-         
-         
-                     uni.forEach(element => {
-                        if(getIndexOfK(global_kepped, element)){
-                         
-                        }  else {
-                         global_kepped.push([element, 0])
+        var holdStrings = []
+        var historyArray = []
+        var keeped = []
+        var globalKept = []
+        var typingTimer, cursorPosition;
+        var glocount = 0
+        var doneTypingInterval = 100;  
+        var $input = $('#parent');
+
+        $(document).ready(function() {
+            $(".hiddena").hide();
+            openNav()
+            var globalWhere = $("#from").text()
+            var k = "parent"
+            called(k)
+        })
+
+        $('[contenteditable]').on('keydown', function(e){
+            if(e.keyCode == 9){
+                e.preventDefault();
+                document.execCommand('insertHTML', false, '&#009');
+            }
+        }).css('white-space', 'pre-wrap');
+
+        var trackSides = []
+
+        function getWordCount(str) {
+            return str.split(' ')
+            .filter(function(n) { return n != '' })
+            .length;
+        }
+         
+        function getCaretPosition() {
+            var elem = document.getElementById("parent")
+            var sel = window.getSelection();
+            var cm_length = [0, 0];
+            if (sel.anchorNode == elem){
+                cm_length = [sel.anchorOffset, sel.extentOffset];
+            } else {
+                var nodes_to_find = [sel.anchorNode, sel.extentNode];
+                if(!elem.contains(sel.anchorNode) || !elem.contains(sel.extentNode)){
+                    return undefined;
+                } else {
+                    var found = [0,0];
+                    var i;
+                    node_walk(elem, function(node) {
+                        for(i = 0; i < 2; i++) {
+                            if(node == nodes_to_find[i]) {
+                                found[i] = true;
+                                if(found[i == 0 ? 1 : 0])
+                                return false;
+                            }
                         }
-          
-                     });
+                        if(node.textContent && !node.firstChild) {
+                            for(i = 0; i < 2; i++) {
+                                if(!found[i]){
+                                    cm_length[i] += node.textContent.length;
+                                }
+                            }
+                        }
+                    });
+                    cm_length[0] += sel.anchorOffset;
+                    cm_length[1] += sel.extentOffset;
+                }
+            }
          
+            if(cm_length[0] <= cm_length[1]){
+                $("#caretposition").html(cm_length)
+                cursorPosition = parseFloat(cm_length[1]) 
+                return cm_length;
+            } else {
+                $("#caretposition").html(cm_length[1])
+                cursorPosition = parseFloat(cm_length[1])
+                return [cm_length[1], cm_length[0]];
+            }
+        }
          
+        $input.on('keyup', function () {
+            clearTimeout(typingTimer);       
+            getCaretPosition()
+            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        });
+        
+        $input.on('keydown', function () {
+            clearTimeout(typingTimer);
+        });
+        
+        function node_walk(node, func) {
+        var result = func(node);
+        for(node = node.firstChild; result !== false && node; node = node.nextSibling)
+            result = node_walk(node, func);
+        return result;
+        };
+        
+        function SetCaretPosition(el, pos){
+            for(var node of el.childNodes){
+                if(node.nodeType == 3){
+                    if(node.length >= pos){
+                        var range = document.createRange(),
+                        sel = window.getSelection();
+                        range.setStart(node,pos);
+                        range.collapse(true);
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                        return -1;
+                    }else{
+                        pos -= node.length;
+                    }
+                }else{
+                    pos = SetCaretPosition(node,pos);
+                    if(pos == -1){
+                        return -1;
+                    }
+                }
+            }
+            return pos;
+         }
          
-                     return metauni
-                 }
+        function doneTyping () {
+            underline()
+            var elem = document.getElementById("parent")
+            SetCaretPosition(elem, cursorPosition)
+        }
          
+        function tiger(x){
+            console.log("gopne")
+            var y = document.getElementById(x).textContent
+            console.log(x, y)
+            document.getElementById(y).scrollIntoView()
+            document.getElementById("main_container2").style.width = `400px`
+        }
+         
+        function underline(){              
+            for (let i = 0; i < trackSides.length; i++) {
+                if(trackSides[i][1] == 0 ){
+                    var inputText = document.getElementById("parent");
+                    var innerHTML = inputText.innerHTML;
+                    trackSides[i][1] = 1
+                    var randInt =   Math.floor(Math.random()*90000) + 10000;
+                    var abc = trackSides[i][0]  
+                    var index = innerHTML.indexOf(abc); 
+                    innerHTML = innerHTML.substring(0,index) + `<span onclick=tiger(${randInt}) style="border-bottom: 2px solid pink" id=${randInt}>${abc}</span>` + innerHTML.substring(index + abc.length);
+                    inputText.innerHTML = innerHTML;
+                } else {
+                }
+            }     
+        }
+        
+        function called(){
+            var current_split = split_and_clean()
+            var get_uniques = uniques(current_split)
+            var rep = []             
+            for (let i = 0; i < globalKept.length; i++) {
+                if(globalKept[i][1] == 0){
+                    var prevPrevWordLookup = globalKept[i][0]
+                    try {
+                        if(keywords.includes(prevPrevWordLookup)) {
+                            var masterDiv = document.createElement("div");
+                            $("#sidebar").prepend(`
+                            <div id=${prevPrevWordLookup}  class="group borderUpDown relative overflow-hidden md:first:row-span-2 group flex flex-col border border-orange-50 dark:border-gray-900 px-3 pb-4 pt-6 2x:pt-10  bg-gradient-to-r from-orange-500/5 to-white dark:from-gray-850 dark:to-gray-950 dark:hover:from-gray-800 shadow-none transition-shadow">
+                                <p style="font-size: 14px ; color: gainsboro; padding-left: 0px;"><span contenteditable="true" id="title" style="color: rgb(64, 120, 241);">${prevPrevWordLookup}</span>
+                            </div>
+                            <br/><br/>
+                            `)
+                            document.getElementById("sidebar").appendChild(masterDiv);
+                            refireEditor()
+                            trackSides.push([(prevPrevWordLookup), 0])
+                        } else {
+                        }
+                        refireEditor()
+                    } catch (error) {
+                    }
+                    globalKept[i][1] = 1
+                }
+            }
+            get_uniques = rep
+            historyArray = get_uniques
+            refireEditor() 
+        }
+
+        $('[contenteditable]').on('keydown', function(e){
+            if(e.keyCode == 9){
+                e.preventDefault();
+                document.execCommand('insertHTML', false, '&#009');
+            }
+        }).css('white-space', 'pre-wrap');
+
+        function uniques(array){
+            var uni = [... new Set(array)]
+            var metauni = []
+            uni.forEach(element => {
+                if(getIndexOfK(globalKept, element)){             
+                }  else {
+                globalKept.push([element, 0])
+                }
+            });
+            return metauni
+        }
+         
+        function split_and_clean(){
+            x = document.getElementById("parent").textContent         
+            var splitCurrentText_Array = x.split(" ")
+            console.log(splitCurrentText_Array)
+            var ensure = []
+            splitCurrentText_Array.forEach(element => {
+                var ins = element.split(" ")
+                ins.forEach(elementa => {
+                    ensure.push(elementa)
+                });
+            });
+            console.log(ensure)
+            return ensure
+        }
                  
-                 function split_and_clean(){
-                     x = document.getElementById("parent").textContent
-                     console.log(x, "www")
+        function getIndexOfK(arr, k) {
+            for (var i = 0; i < arr.length; i++) {
+                var index = arr[i].indexOf(k);
+                if (index > -1) {
+                    return [i, index];
+                }
+            }
+        }
          
-                     var splitCurrentText_Array = x.split(" ")
-                     console.log(splitCurrentText_Array)
-                     var ensure = []
-                     splitCurrentText_Array.forEach(element => {
-                         var ins = element.split(" ")
-                         ins.forEach(elementa => {
-                             ensure.push(elementa)
-                         });
-                     });
-                     console.log(ensure)
-                     return ensure
-                 }
-         
-                 
-                 function getIndexOfK(arr, k) {
-                     for (var i = 0; i < arr.length; i++) {
-                         var index = arr[i].indexOf(k);
-                         if (index > -1) {
-                         return [i, index];
-                         }
-                     }
-                 }
-         
-         
-         
-                 function refire(){
-                     var editor = new MediumEditor('.editable', {
-                     buttonLabels: 'fontawesome',
-                     extensions: {
-                     table: new MediumEditorTable()
-                     },
-                     toolbar: {
-                     buttons: [
-                         'h2',
-                         'bold',
-                         'italic',
-                         'unorderedlist',
-                         'orderedlist',
-                         'table'
-                     ]
-                     }
-                 });
-                 }
-          
-                 var editor = new MediumEditor('.editable', {
-                     buttonLabels: 'fontawesome',
-                     extensions: {
-                     table: new MediumEditorTable()
-                     },
-                     toolbar: {
-                     buttons: [
-                         'h2',
-                         'bold',
-                         'italic',
-                         'unorderedlist',
-                         'orderedlist',
-                         'table'
-                     ]
-                     }
-                 });
-                 var HighlighterButton = MediumEditor.Extension.extend({
-                 name: 'highlighter',
-         
-                 init: function () {
-                     this.button = this.document.createElement('button');
-                     this.button.classList.add('medium-editor-action');
-                     this.button.innerHTML = '<b>H</b>';
-                 },
-         
-                 getButton: function () {
-                     return this.button;
-                 }
-                 });
-         
-                 var editor = new MediumEditor('.editable', {
-                     buttonLabels: 'fontawesome',
-                     extensions: {
-                     table: new MediumEditorTable()
-                     },
-                     toolbar: {
-                     buttons: [
-                         'h2',
-                         'bold',
-                         'italic',
-                         'unorderedlist',
-                         'orderedlist',
-                         'table'
-                     ]
-                     }
-                 });
-             
-         
-                 
-                 function refireEditor(){
-         
-                     $('.tabable').on('keydown', function(e){
-             if(e.keyCode == 9){
-                 e.preventDefault();
-                 document.execCommand('insertHTML', false, '&#009');
-             }
-         }).css('white-space', 'pre-wrap');
-         
-         var editor = new MediumEditor('.editable', {
-                     buttonLabels: 'fontawesome',
-                     extensions: {
-                     table: new MediumEditorTable()
-                     },
-                     toolbar: {
-                     buttons: [
-                         'h2',
-                         'bold',
-                         'italic',
-                         'unorderedlist',
-                         'orderedlist',
-                         'table'
-                     ]
-                     }
-                 });
-                 }
+        var editor = new MediumEditor('.editable', {
+            buttonLabels: 'fontawesome',
+            toolbar: {
+            buttons: [
+                'h2',
+                'bold',
+                'italic',
+                'unorderedlist',
+                'orderedlist',
+                'table'
+            ]
+            }
+        });
+
+        function refireEditor(){
+            $('.tabable').on('keydown', function(e){
+                if(e.keyCode == 9){
+                    e.preventDefault();
+                    document.execCommand('insertHTML', false, '&#009');
+                }
+            }).css('white-space', 'pre-wrap');
+    
+            var editor = new MediumEditor('.editable', {
+                buttonLabels: 'fontawesome',
+                extensions: {
+                table: new MediumEditorTable()
+                },
+                toolbar: {
+                buttons: [
+                    'h2',
+                    'bold',
+                    'italic',
+                    'unorderedlist',
+                    'orderedlist',
+                    'table'
+                ]
+                }
+            });
+        }
       </script>
    </body>
 </html>
